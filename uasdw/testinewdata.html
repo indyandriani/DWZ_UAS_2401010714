@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tambah Data Testimoni</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Tambah Data Testimoni</h1>
+        <a href="testilistdata.html" class="btn btn-primary">List Data Testimoni</a>
+    </div>
+
+    <div class="container">
+        <form id="ftesti">
+            <div class="form-group">
+                <label>Nama</label>
+                <input type="text" name="NAMA" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="EMAIL" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Testimoni</label>
+                <textarea name="TESTI" class="form-control" required>Tuliskan Testimoni anda</textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="cmdTulis" class="btn btn-primary">Simpan Testimoni</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <h1>Data Testimoni</h1>
+        <a href="listproduk.html" class="btn btn-primary">Lihat Produk</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Menangani pengiriman form dengan AJAX
+            $('#ftesti').on('submit', function(e) {
+                e.preventDefault();  // Mencegah pengiriman form secara default
+
+                var formData = $(this).serialize();  // Mengambil data form dalam format query string
+
+                $.ajax({
+                    url: 'process_testimonial.php',  // Gantilah dengan URL yang akan memproses form
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        alert('Testimoni berhasil disimpan!');
+                        $('#ftesti')[0].reset();  // Mengosongkan form setelah pengiriman
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan saat mengirim data.');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
